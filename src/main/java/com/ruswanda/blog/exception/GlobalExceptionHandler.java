@@ -16,6 +16,17 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Created by IntelliJ IDEA.
+ * Project : blog
+ * User: Ruswanda
+ * Email: wandasukabumi2020@gmail.com
+ * Telegram : @Ruswanda
+ * Date: 20/12/23
+ * Time: 08.47
+ */
+
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 

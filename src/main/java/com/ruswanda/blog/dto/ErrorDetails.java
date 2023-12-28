@@ -2,20 +2,31 @@ package com.ruswanda.blog.dto;
 
 import java.time.LocalDateTime;
 
+/**
+ * Created by IntelliJ IDEA.
+ * Project : blog
+ * User: Ruswanda
+ * Email: wandasukabumi2020@gmail.com
+ * Telegram : @Ruswanda
+ * Date: 20/12/23
+ * Time: 08.47
+ */
+
+
 public class ErrorDetails {
 
-    private LocalDateTime time = LocalDateTime.now();
+    private LocalDateTime timestamp = LocalDateTime.now();
     private String message;
     private String details;
 
-    public ErrorDetails(LocalDateTime time, String message, String details) {
-        this.time = time;
+    public ErrorDetails(LocalDateTime timestamp, String message, String details) {
+        this.timestamp = timestamp;
         this.message = message;
         this.details = details;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
     public String getMessage() {

@@ -1,27 +1,37 @@
 package com.ruswanda.blog.entity;
 
+
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * Created by IntelliJ IDEA.
+ * Project : blog
+ * User: Ruswanda
+ * Email: wandasukabumi2020@gmail.com
+ * Telegram : @Ruswanda
+ * Date: 20/12/23
+ * Time: 08.47
+ */
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@Builder
-@EqualsAndHashCode(callSuper = false)
-@ToString
+@Data
 @Entity
-@Table(name = "comment")
-@SQLDelete(sql = "UPDATE comment SET status_record ='INACTIVE' WHERE id=?")
-@SQLRestriction("status_record <> 'ACTIVE'")
-public class Comment extends BaseEntity{
+@Table(name = "comments")
+public class Comment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     private String name;
     private String email;
     private String body;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 }
