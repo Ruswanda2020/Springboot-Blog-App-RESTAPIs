@@ -5,13 +5,10 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@Builder
-@EqualsAndHashCode(callSuper = false)
-@ToString
+@Data
 @Entity
 @Table(name = "comment")
 @SQLDelete(sql = "UPDATE comment SET status_record ='INACTIVE' WHERE id=?")

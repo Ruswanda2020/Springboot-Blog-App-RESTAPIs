@@ -1,14 +1,13 @@
 package com.ruswanda.blog.entity;
 
-import com.ruswanda.blog.enumaretion.StatusRecord;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import java.util.HashSet;
+
 import java.util.Set;
-import java.util.UUID;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +16,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "post", uniqueConstraints =
         {@UniqueConstraint(columnNames = "title")})
-@SQLDelete(sql = "UPDATE post SET status_record ='INACTIVE' WHERE post_id=?")
+@SQLDelete(sql = "UPDATE post SET status_record ='INACTIVE' WHERE id=?")
 @Where(clause = "status_record='ACTIVE'")
 public class Post {
 
