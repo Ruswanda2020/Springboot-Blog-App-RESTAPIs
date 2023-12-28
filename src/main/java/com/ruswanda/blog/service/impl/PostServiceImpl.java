@@ -7,8 +7,8 @@ import com.ruswanda.blog.exception.ResourceNotFoundException;
 import com.ruswanda.blog.repository.PostRepository;
 import com.ruswanda.blog.service.PostService;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,11 +19,13 @@ import java.util.List;
 
 @Service
 @Transactional
-@AllArgsConstructor
+
 public class PostServiceImpl implements PostService {
 
-    private final PostRepository postRepository;
-    private final ModelMapper modelMapper;
+    @Autowired
+    private PostRepository postRepository;
+    @Autowired
+    private  ModelMapper modelMapper;
 
     @Override
     public PostDto createPost(PostDto dto) {
@@ -33,17 +35,14 @@ public class PostServiceImpl implements PostService {
         post.setContent(dto.getContent());
         Post newPost = postRepository.save(post);
 
-        PostDto postResponse = new PostDto();
-        postResponse.setTitle(newPost.getTitle());
-        postResponse.setDescription(newPost.getDescription());
-        postResponse.setContent(newPost.getContent());
-        return postResponse;
+        return mapToDTO(newPost);
     }
+
     @Override
-    public Post findById(String id) {
+    public PostDto findById(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("post", "id", id));
-        return post;
+        return mapToDTO(post);
     }
 
     @Override
@@ -72,14 +71,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("post", "id", id));
         postRepository.deleteById(id);
     }
 
     @Override
-    public PostDto updateById(PostDto postDto, String id) {
+    public PostDto updateById(PostDto postDto, Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("post", "id", id));
 

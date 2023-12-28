@@ -3,7 +3,7 @@ package com.ruswanda.blog.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +15,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @Table(name = "comment")
 @SQLDelete(sql = "UPDATE comment SET status_record ='INACTIVE' WHERE id=?")
-@Where(clause = "status_record='ACTIVE'")
+@SQLRestriction("status_record <> 'ACTIVE'")
 public class Comment extends BaseEntity{
 
     private String name;
