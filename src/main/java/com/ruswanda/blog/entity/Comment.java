@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
  * Time: 08.47
  */
 
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
