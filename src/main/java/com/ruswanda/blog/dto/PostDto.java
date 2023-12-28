@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,7 +20,7 @@ import java.util.UUID;
 @Data
 public class PostDto {
 
-    private String id = UUID.randomUUID().toString();
+    private Long id ;
     @NotEmpty @NotNull
     @Size(min = 2, message = "Post title should have 2 characters")
     private String title;

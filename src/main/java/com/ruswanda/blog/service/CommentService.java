@@ -1,18 +1,28 @@
 package com.ruswanda.blog.service;
 
-
 import com.ruswanda.blog.dto.CommentDto;
 
 import java.util.List;
 
+/**
+ * Created by IntelliJ IDEA.
+ * Project : blog
+ * User: Ruswanda
+ * Email: wandasukabumi2020@gmail.com
+ * Telegram : @Ruswanda
+ * Date: 20/12/23
+ * Time: 08.47
+ */
+
 public interface CommentService {
 
-    public CommentDto createComment(String postId, CommentDto commentDto);
+    CommentDto createComment(long postId, CommentDto commentDto);
 
-    List<CommentDto> findAllByPostId(String id);
+    List<CommentDto> getCommentsByPostId(long postId);
 
-    CommentDto getCommentById(String postId, String commentId);
+    CommentDto getCommentById(Long postId, Long commentId);
 
-    CommentDto updateComment(String postId, String commentId, CommentDto commentDto);
-    public void deleteComment(String postId, String commentId);
+    CommentDto updateComment(Long postId, long commentId, CommentDto commentRequest);
+
+    void deleteComment(Long postId, Long commentId);
 }
