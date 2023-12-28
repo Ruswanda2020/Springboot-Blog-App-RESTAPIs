@@ -22,6 +22,6 @@ public class Comment extends BaseEntity{
     private String email;
     private String body;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
 }

@@ -14,7 +14,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "post", uniqueConstraints =
         {@UniqueConstraint(columnNames = "title")})
@@ -22,16 +21,10 @@ import java.util.UUID;
 @Where(clause = "status_record='ACTIVE'")
 public class Post {
 
-    @Id
-    @Column(name = "post_id")
-    private String postId= UUID.randomUUID().toString();
     private String title;
     private String description;
     @Column(columnDefinition = "TEXT")
     private String content;
-
-    @Enumerated(EnumType.STRING)
-    private StatusRecord statusRecord = StatusRecord.ACTIVE;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments;
