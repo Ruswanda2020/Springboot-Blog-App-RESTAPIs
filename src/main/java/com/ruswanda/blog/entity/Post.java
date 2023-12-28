@@ -16,7 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "post", uniqueConstraints =
         {@UniqueConstraint(columnNames = "title")})
-@SQLDelete(sql = "UPDATE post SET status_record ='INACTIVE' WHERE id=?")
+@SQLDelete(sql = "UPDATE post SET status_record ='INACTIVE' WHERE brid=?")
 @Where(clause = "status_record='ACTIVE'")
 public class Post {
 
