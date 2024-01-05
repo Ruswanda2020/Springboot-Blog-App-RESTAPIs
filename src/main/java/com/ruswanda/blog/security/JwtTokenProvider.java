@@ -10,6 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+/**
+ * Created by IntelliJ IDEA.
+ * Project : blog
+ * User: Ruswanda
+ * Email: wandasukabumi2020@gmail.com
+ * Telegram : @Ruswanda
+ * Date: 20/12/23
+ * Time: 08.47
+ */
+
 
 import java.security.Key;
 import java.util.Date;

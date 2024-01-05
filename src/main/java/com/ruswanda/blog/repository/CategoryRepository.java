@@ -1,10 +1,7 @@
 package com.ruswanda.blog.repository;
 
-
-import com.ruswanda.blog.entity.Post;
+import com.ruswanda.blog.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,6 +13,6 @@ import java.util.List;
  * Time: 08.47
  */
 
-public interface PostRepository extends JpaRepository<Post, Long> {
-    List<Post> findByCategoryId(Long id);
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 }
+

@@ -2,8 +2,10 @@ package com.ruswanda.blog.service.impl;
 
 import com.ruswanda.blog.dto.PostDto;
 import com.ruswanda.blog.dto.PostResponse;
+import com.ruswanda.blog.entity.Category;
 import com.ruswanda.blog.entity.Post;
 import com.ruswanda.blog.exception.ResourceNotFoundException;
+import com.ruswanda.blog.repository.CategoryRepository;
 import com.ruswanda.blog.repository.PostRepository;
 import com.ruswanda.blog.service.PostService;
 import jakarta.transaction.Transactional;
@@ -35,13 +37,17 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
     @Autowired
     private  ModelMapper modelMapper;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public PostDto createPost(PostDto dto) {
-        Post post = new Post();
-        post.setTitle(dto.getTitle());
-        post.setDescription(dto.getDescription());
-        post.setContent(dto.getContent());
+
+        Category category = categoryRepository.findById(dto.getCategoryId())
+                .orElseThrow(()-> new ResourceNotFoundException("category", "id", dto.getCategoryId()));
+
+        Post post = mapToEntity(dto);
+        post.setCategory(category);
         Post newPost = postRepository.save(post);
 
         return mapToDTO(newPost);
@@ -92,15 +98,31 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("post", "id", id));
 
+        Category category = categoryRepository.findById(postDto.getCategoryId())
+                        .orElseThrow(()-> new ResourceNotFoundException("category", "id", postDto.getCategoryId()));
+
         post.setTitle(postDto.getTitle() == null || postDto.getTitle().isBlank() ?
                 post.getTitle() : postDto.getTitle());
         post.setDescription(postDto.getDescription() == null || postDto.getDescription().isBlank() ?
                 post.getDescription() : postDto.getDescription());
         post.setContent(postDto.getContent() == null || postDto.getContent().isBlank() ?
                 post.getContent() : postDto.getContent());
+        post.setCategory(category);
 
         Post postUpdate = postRepository.save(post);
         return mapToDTO(postUpdate);
+    }
+
+    @Override
+    public List<PostDto> findByCategoryId(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(()-> new ResourceNotFoundException("category", "id", categoryId));
+
+        List<Post> posts = postRepository.findByCategoryId(categoryId);
+        return posts
+                .stream()
+                .map(this::mapToDTO)
+                .toList();
     }
 
 

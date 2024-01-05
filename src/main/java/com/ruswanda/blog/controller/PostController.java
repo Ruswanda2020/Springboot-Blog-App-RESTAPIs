@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : blog
@@ -28,7 +30,6 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto){
         return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
@@ -39,7 +40,6 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostById(id));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<PostDto> updatePostById(@RequestBody PostDto postDto, @PathVariable Long id){
         PostDto updateResponse = postService.updateById(postDto, id);
@@ -61,6 +61,13 @@ public class PostController {
     ){
         return postService.getAllPosts(pageNo, pageSize, sortBy, sortDir);
     }
+
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<PostDto>> getPostByCategoryId(@PathVariable("id") Long categoryId){
+        List<PostDto> posts = postService.findByCategoryId(categoryId);
+        return ResponseEntity.ok(posts);
+    }
+
 
 
 }
