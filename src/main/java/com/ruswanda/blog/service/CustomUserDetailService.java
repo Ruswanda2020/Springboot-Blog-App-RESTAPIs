@@ -2,7 +2,6 @@ package com.ruswanda.blog.service;
 
 import com.ruswanda.blog.entity.User;
 import com.ruswanda.blog.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,7 +15,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
