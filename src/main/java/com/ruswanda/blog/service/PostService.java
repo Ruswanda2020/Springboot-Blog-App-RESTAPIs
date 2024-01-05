@@ -3,6 +3,8 @@ package com.ruswanda.blog.service;
 import com.ruswanda.blog.dto.PostDto;
 import com.ruswanda.blog.dto.PostResponse;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : blog
@@ -19,4 +21,5 @@ public interface PostService {
     PostDto getPostById(long id);
     void deletePostById(long id);
     PostDto updateById(PostDto postDto, long id);
+    List<PostDto> findByCategoryId(Long categoryId);
 }

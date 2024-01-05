@@ -15,11 +15,13 @@ import lombok.Setter;
  * Time: 08.47
  */
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class JwtAuthResponse {
-    private String accessToken;
-    private String tokenType = "Bearer";
+@NoArgsConstructor
+@AllArgsConstructor
+public class CategoryDto {
+
+    private Long id;
+    private String name;
+    private String description;
 }
