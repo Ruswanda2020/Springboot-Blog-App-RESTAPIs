@@ -3,6 +3,7 @@ package com.ruswanda.blog.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -25,12 +26,8 @@ public class Post {
     @Column(columnDefinition = "TEXT")
     private String content;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-<<<<<<< HEAD
-    private Set<Comment> comments;
-=======
     private Set<Comment> comments = new HashSet<>();
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
->>>>>>> devlopment
 }
