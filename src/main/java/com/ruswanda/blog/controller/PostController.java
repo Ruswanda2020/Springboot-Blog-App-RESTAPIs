@@ -4,6 +4,10 @@ import com.ruswanda.blog.dto.PostDto;
 import com.ruswanda.blog.dto.PostResponse;
 import com.ruswanda.blog.service.PostService;
 import com.ruswanda.blog.utils.AppConstants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,12 +28,26 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping("/api/v1/posts")
+@Tag(
+        name = "CRUD REST APIs Post Resource "
+)
 public class PostController {
 
     @Autowired
     private PostService postService;
 
+    @Operation(
+            summary = "Create Post REST API",
+            description = "Create Post REST API is used to save Post into Database"
+    )
+    @ApiResponse(
+            responseCode = "201",
+            description = "Http status 201 CREATED"
+    )
+    @SecurityRequirement(
+            name = "Bear Authentication"
+    )
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto){
@@ -41,6 +59,9 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostById(id));
     }
 
+    @SecurityRequirement(
+            name = "Bear Authentication"
+    )
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<PostDto> updatePostById(@RequestBody PostDto postDto, @PathVariable Long id){
@@ -48,6 +69,9 @@ public class PostController {
         return new ResponseEntity<>(updateResponse,   HttpStatus.OK);
     }
 
+    @SecurityRequirement(
+            name = "Bear Authentication"
+    )
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePostById(@PathVariable long id){
