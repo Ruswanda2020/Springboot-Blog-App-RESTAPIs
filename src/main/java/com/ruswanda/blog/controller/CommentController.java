@@ -2,6 +2,7 @@ package com.ruswanda.blog.controller;
 
 import com.ruswanda.blog.dto.CommentDto;
 import com.ruswanda.blog.service.CommentService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/")
+@Tag(
+        name = "CRUD REST APIs Comment Resource "
+)
 public class CommentController {
 
     @Autowired

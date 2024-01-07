@@ -2,6 +2,8 @@ package com.ruswanda.blog.controller;
 
 import com.ruswanda.blog.dto.CategoryDto;
 import com.ruswanda.blog.service.CategoryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +22,18 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api/v1/categories")
+@Tag(
+        name = "CRUD REST APIs Category Resource "
+)
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
+    @SecurityRequirement(
+            name = "Bear Authentication"
+    )
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<CategoryDto> addNewCategory(@RequestBody CategoryDto categoryDto){
@@ -44,6 +52,9 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.getAllCategory());
     }
 
+    @SecurityRequirement(
+            name = "Bear Authentication"
+    )
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto dto,
@@ -51,6 +62,9 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.updateCateCategory(dto, id));
     }
 
+    @SecurityRequirement(
+            name = "Bear Authentication"
+    )
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id){
