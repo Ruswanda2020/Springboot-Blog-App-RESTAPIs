@@ -8,7 +8,7 @@ as well as authentication and authorization using JSON Web Token (JWT). Data is 
 
 ## Features
 - Post Management
-    - Create, read, update, and delete posts (admin privileges required).
+    - Create, read, update, and delete posts (specifically for creating, updating, deleting only by admin).
     - Retrieve posts by ID and category.
   
 - Comment Management
@@ -16,7 +16,7 @@ as well as authentication and authorization using JSON Web Token (JWT). Data is 
     - Retrieve comments by post ID and comment ID.
   
 - Category Management
-    - Create, read, update, and delete categories (admin privileges required).
+    - Create, read, update, and delete categories (specifically for creating, updating, deleting only by admin).
     - Retrieve posts by category ID.
 
 - User Authentication and Authorization
