@@ -37,7 +37,7 @@ as well as authentication and authorization using JSON Web Token (JWT). Data is 
 3. Make sure you have Java and Maven installed.
 4. Clone this repository: git clone https://github.com/Ruswanda2020/Springboot-Blog-App-RESTAPIs.git
 5. Navigate to the project directory. cd Springboot-Blog-App-RESTAPIs
-6. Run the following command to start the application: mvn spring-boot:run.
+6. Run the following command to start the application: mvn spring-boot:run
 
 ## API Endpoints
 Access the API documentation at http://localhost:8080/swagger-ui/index.html#/
