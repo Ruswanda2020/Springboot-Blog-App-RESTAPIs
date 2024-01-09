@@ -40,7 +40,7 @@ as well as authentication and authorization using JSON Web Token (JWT). Data is 
 6. Run the following command to start the application: mvn spring-boot:run.
 
 ## API Endpoints
-Access the API documentation at http://localhost:8080/swagger-ui.html.
+Access the API documentation at http://localhost:8080/swagger-ui/index.html#/
 
 
 Finally, by default, during registration, the role is set as ROLE_USER. 
