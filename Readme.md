@@ -8,21 +8,21 @@ as well as authentication and authorization using JSON Web Token (JWT). Data is 
 
 ## Features
 - Post Management
-  - Create, read, update, and delete posts (admin privileges required).
-  - Retrieve posts by ID and category.
-  - 
--Comment Management
-  - Create, read, update, and delete comments for a specific post.
-  - Retrieve comments by post ID and comment ID.
-  - 
+    - Create, read, update, and delete posts (admin privileges required).
+    - Retrieve posts by ID and category.
+  
+- Comment Management
+    - Create, read, update, and delete comments for a specific post.
+    - Retrieve comments by post ID and comment ID.
+  
 - Category Management
- - Create, read, update, and delete categories (admin privileges required).
- - Retrieve posts by category ID.
+    - Create, read, update, and delete categories (admin privileges required).
+    - Retrieve posts by category ID.
 
 - User Authentication and Authorization
- - User login using JWT.
- - User registration.
- - Endpoint protection using JWT.
+    - User login using JWT.
+    - User registration.
+    - Endpoint protection using JWT.
 
 ## Technology Stack
 - Java 21
@@ -35,8 +35,8 @@ as well as authentication and authorization using JSON Web Token (JWT). Data is 
 1. Ensure that MySQL is installed on your system.
 2. Adjust the database configuration in the application.properties file.
 3. Make sure you have Java and Maven installed.
-4. Clone this repository: git clone <repository_url>.
-5. Navigate to the project directory.
+4. Clone this repository: git clone https://github.com/Ruswanda2020/Springboot-Blog-App-RESTAPIs.git
+5. Navigate to the project directory. cd Springboot-Blog-App-RESTAPIs
 6. Run the following command to start the application: mvn spring-boot:run.
 
 ## API Endpoints
