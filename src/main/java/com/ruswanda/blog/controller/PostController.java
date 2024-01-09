@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ import java.util.List;
  * Time: 08.47
  */
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/posts")
 @Tag(
@@ -51,12 +53,22 @@ public class PostController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto){
-        return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
+
+        log.info("Received a request to create a new post: {}", postDto);
+        PostDto createdPost = postService.createPost(postDto);
+        log.info("Post created successfully. Post details: {}", createdPost);
+
+        return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> getPostById(@PathVariable long id ){
-        return ResponseEntity.ok(postService.getPostById(id));
+
+        log.info("Received a request to retrieve post with ID: {}", id);
+        PostDto postDto = postService.getPostById(id);
+        log.info("Post found for ID {}: {}", id, postDto);
+        return ResponseEntity.ok(postDto);
     }
 
     @SecurityRequirement(
@@ -65,8 +77,11 @@ public class PostController {
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<PostDto> updatePostById(@RequestBody PostDto postDto, @PathVariable Long id){
+
+        log.info("Received a request to update post with ID {}: {}", id, postDto);
         PostDto updateResponse = postService.updateById(postDto, id);
-        return new ResponseEntity<>(updateResponse,   HttpStatus.OK);
+        log.info("Post with ID {} updated successfully. Updated details: {}", id, updateResponse);
+        return ResponseEntity.ok(updateResponse);
     }
 
     @SecurityRequirement(
@@ -75,9 +90,14 @@ public class PostController {
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePostById(@PathVariable long id){
+
+        log.info("Received a request to delete post with ID: {}", id);
         postService.deletePostById(id);
-        return new ResponseEntity<>("post entity deleted successfully.",HttpStatus.OK);
+        log.info("Post with ID {} deleted successfully.", id);
+
+        return new ResponseEntity<>("Post entity deleted successfully.", HttpStatus.OK);
     }
+
 
     @GetMapping
     public PostResponse getAllPosts(
@@ -91,7 +111,9 @@ public class PostController {
 
     @GetMapping("/category/{id}")
     public ResponseEntity<List<PostDto>> getPostByCategoryId(@PathVariable("id") Long categoryId){
+        log.info("Received a request to retrieve posts for category with ID: {}", categoryId);
         List<PostDto> posts = postService.findByCategoryId(categoryId);
+        log.info("Found {} posts for category with ID: {}", posts.size(), categoryId);
         return ResponseEntity.ok(posts);
     }
 
