@@ -41,3 +41,7 @@ as well as authentication and authorization using JSON Web Token (JWT). Data is 
 
 ## API Endpoints
 Access the API documentation at http://localhost:8080/swagger-ui.html.
+
+
+Finally, by default, during registration, the role is set as ROLE_USER. 
+You can configure it in your MySQL database and change it to ROLE_ADMIN.
